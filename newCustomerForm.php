@@ -1,7 +1,7 @@
 <div id="wrapper">
     <div id="container">
         <?php
-            include ('includes/menu.php');
+            include('includes/header.php');
         ?>
         <div id="content">
             <div id="form">

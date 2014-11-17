@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <link href="css/UI-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/core.css" rel="stylesheet" type="text/css" />
     <script src="js/jquery.js"></script>
     <script src="js/main.js"></script>
     <script src="js/jquery-ui-1.10.4.custom.js"></script>
@@ -36,7 +36,7 @@
 <div id="wrapper">
     <div id="container">
         <?php
-            include('includes/menu.php');
+            include('includes/header.php');
         ?>
         <div id="content">
             <div id="innerContent">

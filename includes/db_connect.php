@@ -6,3 +6,5 @@ $con = new mysqli(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+$Dir = "https://localhost:8080/DART";

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link href="css/UI-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/core.css" rel="stylesheet" type="text/css" />
     <script src="js/jquery.js"> </script>
     <script src="js/jquery-ui-1.10.4.custom.js"></script>
     <script src="js/main.js"></script>
@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die('Error: ' . mysqli_error($con));
         }
         echo "<div id='wrapper'><div id='container'>";
-        include_once ('includes/menu.php');
+        include_once('includes/header.php');
         echo "<div id='content'><div id='innerContent'><h4>Application Successful</h4><span>Your request has been submitted. Please note that it may take up to 48 hours to approve your application. You may now select a tentative schedule based on current availabilities on the next page.</span><br /><a href='selectSchedule.php'><h4>Click here to view current availabilities<h4></a></div></div></div></div>";
         include_once ('includes/footer.php');
     }
