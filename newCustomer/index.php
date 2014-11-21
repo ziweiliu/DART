@@ -1,12 +1,45 @@
+<?php
+include_once '../includes/db_connect.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="<?php echo $DIR ?>/css/UI-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $DIR ?>/css/core.css" rel="stylesheet" type="text/css" />
+    <script src="<?php echo $DIR ?>/js/jquery.js"> </script>
+    <script src="<?php echo $DIR ?>/js/jquery-ui-1.10.4.custom.js"></script>
+    <script src="<?php echo $DIR ?>/js/main.js"></script>
+    <script>
+        $().ready(function(){
+            $("#datepicker1").datepicker({
+                minDate: 0,
+                dateFormat: "yy-mm-dd"
+            });
+            $("#datepicker2").datepicker({
+                minDate: 0,
+                maxDate: 60,
+                dateFormat: "yy-mm-dd"
+            });
+        })
+
+
+    </script>
+    <style>
+
+    </style>
+    <title>New Customer</title>
+</head>
+<body>
+<?php
+include('../includes/header.php');
+?>
 <div id="wrapper">
     <div id="container">
-        <?php
-            include('includes/header.php');
-        ?>
         <div id="content">
             <div id="form">
                 <h2>New Customer Registration</h2>
-                <form name="newCustomer" method="POST" action ="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
+                <form name="newCustomer" method="POST" action ="submit/index.php" enctype="multipart/form-data">
                     <label>Salutations:</label>
                     <select name="salutation">
                         <option value="Ms">Ms.</option>
@@ -68,3 +101,7 @@
         </div>
     </div>
 </div>
+
+
+</body>
+</html>

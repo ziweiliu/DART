@@ -1,3 +1,5 @@
+var DIR = "http://localhost:8080/DART"
+
 var timeslots = [];
 timeslots[1]="9:00 AM";
 timeslots[2]="9:10 AM";
@@ -180,11 +182,11 @@ function displayCustomers(arrayCustomers){
             var endDate = new Date(d[0], d[1]-1, d[2]);
             if (historical === false){
                 if (endDate >= currDate){
-                    outputString = outputString + "<tr><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].universityID + "</td><td>"+ arrayCustomers[i].phone + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
+                    outputString = outputString + "<tr data-href='" + DIR + "/viewCustomer/?cust_id=" + arrayCustomers[i].cust_id + "'><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].uscID + "</td><td>"+ arrayCustomers[i].cell + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
                 }
             }
             else {
-                outputString = outputString + "<tr><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].universityID + "</td><td>"+ arrayCustomers[i].phone + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
+                outputString = outputString + "<tr data-href='" + DIR + "/viewCustomer/?cust_id=" + arrayCustomers[i].cust_id + "'><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].uscID + "</td><td>"+ arrayCustomers[i].cell + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
             }
         }       
     }
@@ -193,19 +195,19 @@ function displayCustomers(arrayCustomers){
         for (var i = 0; i < arrayCustomers.length; i++){
             var d = arrayCustomers[i].endDate.split(/[-]/);
             var endDate = new Date(d[0], d[1]-1, d[2]);
-            if (arrayCustomers[i].firstName.toLowerCase().indexOf(t)>= 0 ||arrayCustomers[i].nickName.toLowerCase().indexOf(t)>= 0 ||arrayCustomers[i].lastName.toLowerCase().indexOf(t)>= 0 ||arrayCustomers[i].universityID.toLowerCase().indexOf(t)>= 0||arrayCustomers[i].phone.toLowerCase().indexOf(t)>= 0||arrayCustomers[i].email.toLowerCase().indexOf(t)>= 0){
+            if (arrayCustomers[i].firstName.toLowerCase().indexOf(t)>= 0 ||arrayCustomers[i].nickName.toLowerCase().indexOf(t)>= 0 ||arrayCustomers[i].lastName.toLowerCase().indexOf(t)>= 0 ||arrayCustomers[i].uscID.toLowerCase().indexOf(t)>= 0||arrayCustomers[i].cell.toLowerCase().indexOf(t)>= 0||arrayCustomers[i].email.toLowerCase().indexOf(t)>= 0){
              if (historical === false){
                 if (endDate >= currDate){
-                    outputString = outputString + "<tr><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].universityID + "</td><td>"+ arrayCustomers[i].phone + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
+                    outputString = outputString + "<tr data-href='" + DIR + "/viewCustomer/?cust_id=" + arrayCustomers[i].cust_id + "'><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].uscID + "</td><td>"+ arrayCustomers[i].cell + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
                 }
             }
             else {
-                outputString = outputString + "<tr><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].universityID + "</td><td>"+ arrayCustomers[i].phone + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
+                outputString = outputString + "<tr data-href='" + DIR + "/viewCustomer/?cust_id=" + arrayCustomers[i].cust_id + "'><td>" + arrayCustomers[i].firstName + "</td><td>"+ arrayCustomers[i].nickName + "</td><td>"+ arrayCustomers[i].lastName + "</td><td>"+ arrayCustomers[i].uscID + "</td><td>"+ arrayCustomers[i].cell + "</td><td>"+ arrayCustomers[i].email + "</td><td>"+ arrayCustomers[i].startDate + "</td><td>" + arrayCustomers[i].endDate + "</td></tr>";
             }   
             }
         } 
     }
-    //finishes teh table
+    //finishes the table
     outputString = outputString + "</table>";
     //outputs to the page
     document.getElementById('displayCustomers').innerHTML = outputString;
