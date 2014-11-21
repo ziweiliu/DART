@@ -1,7 +1,6 @@
 <?php
 //this function takes the mysql customers table and changes it into a JS array for search and output purposes (to search without server connection)
 function parseCustomers($con){
-    global $con;
     $r = mysqli_query($con, "SELECT * FROM customers");
     if (!$r){
         echo mysqli_error($con);
@@ -30,3 +29,16 @@ function test_input($data) {
     return $data;
 }
 
+function generateStateSelect($name, $con){
+    $html = "<select name='$name'>";
+    $sql = "SELECT * FROM state";
+    $result = mysqli_query($con, $sql);
+    if (!$result){
+        exit (mysqli_error($con));
+    }
+    while ($r = mysqli_fetch_array($result)){
+        $html = $html . "<option value = ".$r['abbreviation'].">".$r['name']."</option>";
+    }
+    $html = $html . "</select>";
+    return $html;
+}

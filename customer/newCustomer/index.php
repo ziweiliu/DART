@@ -1,5 +1,7 @@
 <?php
-include_once '../../includes/db_connect.php';
+$root_DIR = "../../";
+include_once $root_DIR.'includes/db_connect.php';
+include_once  $root_DIR.'/includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +74,9 @@ include('../../includes/header.php');
                     <label>City:</label>
                     <input type="text" name="city" required /><br/>
                     <label>State:</label>
-                    <input type="text" name="state" required /><br/>
+                    <?php
+                    echo generateStateSelect("state", $con);
+                    ?><br/>
                     <label>Zipcode:</label>
                     <input type="text" name="zip" maxlength="5" required /><br/>
                     <label>Cell Number:</label>
@@ -86,17 +90,17 @@ include('../../includes/header.php');
                     <label>End Date of Service:</label>
                     <input type="text" name="endDate" id="datepicker2" /> <br />
                     <input type="checkbox" name="longTerm" value="1"/>This request is for longer than 60 days and I have explained the situation under Speical Needs or Requests.<br />
-                    <span class="warning">All customers are required to submit a valid Doctor's certification. It can be attached electronically here or hand-delivered to the office within five business days of the initial request for services.". </span><br />
+                    <span class="warning">All customers are required to submit a valid Doctor's certification. It can be attached electronically here or hand-delivered to the office within five business days of the initial request for services."</span><br />
                     <label for="file">Filename:</label>
                     <input type="file" name="file" id="file"><br />
                     <input type="checkbox" name="confirm" required/>
-                    <span class="warning">I understand that this application does not guarantee service at my requested times and that it might take up to 48 hours for review and approval.</span><br />
+                    <span class="warning">I understand that this application does not guarantee service at my requested times and that it might take up to 48 hours for review and approval.</span><br /><br />
                     <input type="submit" name = "submit" value="Submit" />
                 </form>
             </div>
         </div>
         <div id="footer">
-            <?php include '../../footer.php';?>
+            <?php include $root_DIR.'/includes/footer.php';?>
 
         </div>
     </div>

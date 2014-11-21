@@ -1,6 +1,7 @@
 <?php
-include_once "../../includes/db_connect.php";
-include_once "../../includes/functions.php";
+$root_DIR = "../../../";
+include_once $root_DIR."includes/db_connect.php";
+include_once $root_DIR."/includes/functions.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +53,7 @@ if (!empty($_POST['firstName'])) {
         $duplicate = true;
     }
     if($duplicate == true){
-        echo "<script>alert('This USC ID has already been registered. Please contact the USC Transportation Office.')</script>";
+        //echo "<script>alert('This USC ID has already been registered. Please contact the USC Transportation Office.')</script>";
     }
     //Actually submits the form
     else {
@@ -69,24 +70,24 @@ if (!empty($_POST['firstName'])) {
                 || ($_FILES["file"]["type"] == "image/x-png")
                 || ($_FILES["file"]["type"] == "image/png")
                 || ($_FILES["file"]["type"] == "application/pdf"))
-            && ($_FILES["file"]["size"] < 800000)
+            && ($_FILES["file"]["size"] < 80000000)
             && ($_FILES["file"]["size"] > 5)
             && in_array($extension, $allowedExts)) {
             if ($_FILES["file"]["error"] > 0) {
                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
             } else {
-                if (file_exists("../../upload/" . $lastName."_".$firstName."_".$date.".".$extension)) {
+                if (file_exists("../../../upload/" . $lastName."_".$firstName."_".$date.".".$extension)) {
                     echo "<script>alert('The file you tried to upload already exists. Please contact the USC Transportation Office');</script>";
                 } else {
                     move_uploaded_file($_FILES["file"]["tmp_name"],
-                        "../../upload/" . $lastName."_".$firstName."_".$date.".".$extension);
+                        "../../../upload/" . $lastName."_".$firstName."_".$date.".".$extension);
                     $fileName = "upload/" . $lastName."_".$firstName."_".$date.".".$extension;
                 }
             }
         }
         else {
-            if ($_FILE["file"]["size"] > 800000){
-                echo "<script>alert('The file size is too big to upload. Please print the note and hand deliver to the Transportation Office');";
+            if ($_FILES["file"]["size"] > 80000000){
+                echo "<script>alert('The file size is too big to upload. Please print the note and hand deliver to the Transportation Office')</script>";
             }
         }
         $sql = "INSERT INTO customers (salutation, firstName, lastName, middleName, nickName, uscID, classification, email, cell, nature, specialNeeds, startDate, endDate, longTerm, fileName) VALUES ('$salutation', '$firstName', '$lastName', '$middleName', '$nickName', '$uscID', '$classification', '$email', '$cell', '$nature', '$specialNeeds', '$startDate', '$endDate', '$longTerm', '$fileName')";
@@ -107,9 +108,9 @@ if (!empty($_POST['firstName'])) {
             exit ('Error:' . mysqli_error($con));
         }
         echo "<div id='wrapper'><div id='container'>";
-        include_once '../../includes/header.php';
+        include $root_DIR.'includes/header.php';
         echo "<div id='content'><div id='innerContent'><h4>Application Successful</h4><span>Your request has been submitted. Please note that it may take up to 48 hours to approve your application. You may now select a tentative schedule based on current availabilities on the next page.</span><br /><a href='selectSchedule.php'><h4>Click here to view current availabilities<h4></a></div></div></div></div>";
-        include_once '../../includes/footer.php';
+        include $root_DIR.'includes/footer.php';
     }
 }
 else {
