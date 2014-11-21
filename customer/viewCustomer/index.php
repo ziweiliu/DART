@@ -1,5 +1,9 @@
 <?php
-include_once '../includes/db_connect.php';
+$root_DIR = "../../";
+include_once $root_DIR.'includes/db_connect.php';
+if (empty($_GET['cust_id'])){
+    header ("location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +32,7 @@ include_once '../includes/db_connect.php';
 
     </script>
     <?php
-    include_once '../includes/functions.php';
+    include_once $root_DIR.'includes/functions.php';
     ?>
     <title>Index</title>
 </head>
@@ -36,18 +40,18 @@ include_once '../includes/db_connect.php';
 <div id="wrapper">
     <div id="container">
         <?php
-        include '../includes/header.php';
+        include $root_DIR.'includes/header.php';
         ?>
         <div id="content">
             <div id="innerContent">
                 <h2>Viewing Information</h2>
-                <form name = "updateCustomer" action ="updateCustomer.php" method ="POST">
+                <form name = "updateCustomer" action ="../updateCustomer/index.php" method ="POST">
                     <?php
                     $cust_id = $_GET['cust_id'];
                     $sql = "SELECT * FROM customers WHERE cust_id = $cust_id";
                     $r = mysqli_query($con, $sql);
                     while ($row = mysqli_fetch_array($r)){
-                        echo "<label>Customer ID: </label><input type='text' value = '".$row['cust_id']."' name='cust_id' readonly /><br />";
+                        echo "<label>Customer ID: </label><input class = 'readonly' type='text' value = '".$row['cust_id']."' name='cust_id' readonly /><br />";
                         echo "<label>Salutation: </label><input type='text' value = '".$row['salutation']."' name='salutation' /><br />";
                         echo "<label>First Name:</label> <input type='text' value = '".$row['firstName']."' name='firstName' /><br />";
                         echo "<label>Middle Name:</label> <input type='text' value = '".$row['middleName']."' name='middleName' /><br />";
@@ -55,8 +59,8 @@ include_once '../includes/db_connect.php';
                         echo "<label>Last Name:</label> <input type='text' value = '".$row['lastName']."' name='lastName' /><br />";
                         echo "<label>Classification:</label> <select value = '".$row['classification']."' name='classification' /><option value='student'>Student</option><option value='faculty'>Faculty</option><option value='staff'>Staff</option><option value='visitor'>Guest</option></select><br />";
                         echo "<label>University ID: </label><input type='text' value = '".$row['uscID']."' name='uscID' maxlength='10' /><br />";
-                        echo "<label>Nature of Disability: </label><input type='text' value = '".$row['nature']."' name='natureOfDisability' /><br />";
-                        echo "<label>Special Needs or Requests:</label> <input type='text' value = '".$row['specialNeeds']."' name='specialNeeds' /><br />";
+                        echo "<label>Nature of Disability: </label><textarea rows='6' cols='22' name='natureOfDisability'>".$row['nature']."</textarea><br />";
+                        echo "<label>Special Needs or Requests:</label><textarea rows='6' cols='22' name='specialNeeds'>".$row['specialNeeds']."</textarea><br />";
                         echo "<label>Cell Phone:</label> <input type='text' value = '".$row['cell']."' name='cell' /><br />";
                         echo "<label>E-mail Address:</label> <input type='text' value = '".$row['email']."' name='email' /><br />";
                         echo "<label>Start Date:</label> <input type='text' value = '".$row['startDate']."' name='startDate' id='datepicker1' /><br />";
@@ -93,6 +97,7 @@ include_once '../includes/db_connect.php';
 
         </div>
     </div>
+    <?php include $root_DIR.'includes/footer.php';?>
 </div>
 
 </body>

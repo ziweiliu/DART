@@ -1,5 +1,8 @@
 <?php
-include_once '../includes/db_connect.php';
+$root_DIR = "../";
+include_once $root_DIR.'includes/db_connect.php';
+include_once $root_DIR.'includes/functions.php';
+to_JS(parseCustomers($con));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,17 +29,13 @@ include_once '../includes/db_connect.php';
             });
         })
     </script>
-    <?php
-    include_once '../includes/functions.php';
-    to_JS(parseCustomers($con));
-    ?>
     <title>Index</title>
 </head>
 <body>
 <div id="wrapper">
     <div id="container">
         <?php
-        include '../includes/header.php';
+        include $root_DIR.'includes/header.php';
         ?>
         <div id="content">
             <div id="innerContent">
@@ -57,6 +56,7 @@ include_once '../includes/db_connect.php';
 
         </div>
     </div>
+    include $root_DIR.'includes/footer.php';
 </div>
 
 </body>

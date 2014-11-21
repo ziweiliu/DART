@@ -1,5 +1,5 @@
 <?php
-include_once '../includes/db_connect.php';
+include_once '../../includes/db_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +32,7 @@ include_once '../includes/db_connect.php';
 </head>
 <body>
 <?php
-include('../includes/header.php');
+include('../../includes/header.php');
 ?>
 <div id="wrapper">
     <div id="container">
@@ -96,7 +96,7 @@ include('../includes/header.php');
             </div>
         </div>
         <div id="footer">
-            footer
+            <?php include '../../footer.php';?>
 
         </div>
     </div>

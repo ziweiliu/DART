@@ -29,6 +29,9 @@ div {
     border: 1px solid #FFCC00;
     margin: -1px;
 }
+.ui-datepicker div {
+    border: 0px;
+}
 label{
     width: 200px;
     display: block;
@@ -131,4 +134,7 @@ h2{
 }
 div.ui-datepicker {
     font-size: 16px;
+}
+.readonly{
+    border: 0px;
 }

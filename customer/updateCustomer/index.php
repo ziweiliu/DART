@@ -1,12 +1,7 @@
 <?php
-include_once('includes/db_connect.php');
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+$root_DIR = "../../";
+include_once $root_DIR.'includes/db_connect.php';
+include_once $root_DIR.'includes/functions.php';
 $cust_id= test_input($_POST["cust_id"]);
 $salutation= test_input($_POST["salutation"]);
 $firstName= test_input($_POST["firstName"]);
@@ -30,4 +25,4 @@ $sql = "UPDATE customers SET salutation = '$salutation', firstName = '$firstName
 if (!mysqli_query($con,$sql)) {
     die('Error: ' . mysqli_error($con));
 }
-header( "Location: viewCustomer.php?custID=".$cust_id ) ;
+header( "Location: ../viewCustomer/?cust_id=".$cust_id ) ;
