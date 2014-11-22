@@ -7,4 +7,13 @@ if (mysqli_connect_error()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
+function test_input($data) {
+    global $con;
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    $data = mysqli_real_escape_string($con,$data);
+    return $data;
+}
+
 $DIR = "http://localhost:8080/DART";

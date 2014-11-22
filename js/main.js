@@ -101,72 +101,11 @@ locations[47]="OHE";
 
 
 
-function generateTimes(){
-    var string1 = "<div style='height: 20px'></div>";
-    var string2 = "<div style='height: 20px'></div>";
-    for (var i = 1; i < 25; i++){
-        string1 = string1 + "<div class='time'>" + timeslots[i] + "</div>";
-    }
-    for (var i = 25; i < 49; i++){
-        string2 = string2 + "<div class='time'>" + timeslots[i] + "</div>";
-    }
-    document.getElementById('timeCol1').innerHTML = string1;
-    document.getElementById('timeCol2').innerHTML = string2;
-}
-function generateSchedule(){
-    var string1 = "<div style='height: 20px; text-align: center;'>DART 1</div>";
-    var string2 = "<div style='height: 20px; text-align: center;'>DART 1</div>";
-    for (var i = 1; i < 25; i++){
-        string1 = string1 + "<div class='info' onClick = 'editRequest(" + "100" + i + ")' id = 'dart1row" + i + "'> Name: <br />Phone: <br />PU Loc:<br />DO Loc: <br /></div>";
-    }
-    for (var i = 25; i < 49; i++){
-        string2 = string2 + "<div class='info' id = 'dart1row" + i + "'>Name: <br />Phone: <br />PU Loc: <br />DO Loc: <br /></div>";
-    }
-    document.getElementById('dart1Col1').innerHTML = string1;
-    document.getElementById('dart1Col2').innerHTML = string2;
-    var string3 = "<div style='height: 20px; text-align: center;'>DART 2</div>";
-    var string4 = "<div style='height: 20px; text-align: center;'>DART 2</div>";
-    for (var i = 1; i < 25; i++){
-        string3 = string3 + "<div class='info' onClick = editLocation('dart2row" + i + "') id = 'dart2row" + i + "'>Name: <br />Phone: <br />PU Loc: <br />DO Loc: <br /></div>";
-    }
-    for (var i = 25; i < 49; i++){
-        string4 = string4 + "<div class='info' id = 'dart2row" + i + "'>Name: <br />Phone: <br />PU Loc: <br />DO Loc: <br /></div>";
-    }
-    document.getElementById('dart2Col1').innerHTML = string3;
-    document.getElementById('dart2Col2').innerHTML = string4;
-    //this following part is to get the title
-    var d = new Date();
-    document.getElementById('todayTitle').innerHTML = d.toDateString();
-}
 
-function generateLocationDropDown(){
-    var string1 = "<select style='float: left' name = 'locations'>";
-    for (var i = 1; i < locations.length; i++){
-        string1 = string1 + "<option value = " + locations[i] + ">" + locations[i] + "</option>";
-    }
-    string1 = string1 + "</select>";
-    return string1;
-}
-
-function editRequest(requestID){
-    //goes back to the top location
-    window.scrollTo(0, 0);
-    //sets the display to block so that they show up
-    document.getElementById('light').style.display = 'block';
-    document.getElementById('dark').style.display = 'block';
-    //uses the window height and width to center the "light" layer
-    document.getElementById('light').style.top = (parseInt($(window).height()) / 2)-200 + "px";
-    document.getElementById('light').style.left = (parseInt($(window).width()) / 2)-200 + "px";
-
-}
-function finishEdit(){
-    document.getElementById('light').style.display = 'none';
-    document.getElementById('dark').style.display = 'none';
-}
 function logOut(){
     alert("Logged Out");
 }
-//this function takes the arrayCustomers parsed by "parseCustomers()" function in functions.php and outputs the list of customers matching the criteria
+//this function takes the arrayCustomers parsed by "parseCustomers()" function in customer_functions.php and outputs the list of customers matching the criteria
 //To-do: add "click" functionalities using _POST?
 function displayCustomers(arrayCustomers){
     //gets the search criteria, if any

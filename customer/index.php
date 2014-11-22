@@ -1,7 +1,7 @@
 <?php
 $root_DIR = "../";
 include_once $root_DIR.'includes/db_connect.php';
-include_once $root_DIR.'includes/functions.php';
+include_once $root_DIR . 'includes/customer_functions.php';
 to_JS(parseCustomers($con));
 ?>
 <!DOCTYPE html>

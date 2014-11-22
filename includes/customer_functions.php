@@ -20,14 +20,7 @@ function to_JS($customers){
     </script>
 <?php
 }
-function test_input($data) {
-    global $con;
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data = mysqli_real_escape_string($con,$data);
-    return $data;
-}
+
 
 function generateStateSelect($name, $con){
     $html = "<select name='$name'>";

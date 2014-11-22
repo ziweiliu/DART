@@ -32,7 +32,7 @@ if (empty($_GET['cust_id'])){
 
     </script>
     <?php
-    include_once $root_DIR.'includes/functions.php';
+    include_once $root_DIR . 'includes/customer_functions.php';
     ?>
     <title>Index</title>
 </head>
