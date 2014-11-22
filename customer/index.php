@@ -56,7 +56,7 @@ to_JS(parseCustomers($con));
 
         </div>
     </div>
-    include $root_DIR.'includes/footer.php';
+    <?php include $root_DIR.'includes/footer.php';?>
 </div>
 
 </body>
