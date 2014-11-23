@@ -15,3 +15,5 @@ function populateSchedule(schedule){
         console.log($("[data-attr='" + timeblock + "']").html());
     }
 }
+
+
