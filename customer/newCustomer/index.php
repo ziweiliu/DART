@@ -16,12 +16,14 @@ include_once  $root_DIR.'/includes/customer_functions.php';
         $().ready(function(){
             $("#datepicker1").datepicker({
                 minDate: 0,
-                dateFormat: "yy-mm-dd"
+                dateFormat: "yy-mm-dd",
+                beforeShowDay: $.datepicker.noWeekends
             });
             $("#datepicker2").datepicker({
                 minDate: 0,
                 maxDate: 60,
-                dateFormat: "yy-mm-dd"
+                dateFormat: "yy-mm-dd",
+                beforeShowDay: $.datepicker.noWeekends
             });
         })
 
@@ -80,7 +82,7 @@ include('../../includes/header.php');
                     <label>Zipcode:</label>
                     <input type="text" name="zip" maxlength="5" required /><br/>
                     <label>Cell Number:</label>
-                    <input type="text" name="cell1" maxlength="3" size = "3" required /><input type="text" name="cell2" size = "3" maxlength="3" required /><input type="text" name="cell3" size = "4" maxlength="4" required/> <br />
+                    (<input type="text" name="cell1" maxlength="3" size = "2" required />)<input type="text" name="cell2" size = "2" maxlength="3" required />-<input type="text" name="cell3" size = "3" maxlength="4" required/> <br />
                     <label>Nature of Disability:</label>
                     <textarea row="4" col="100" maxlength="200" name="natureOfDisability" required /></textarea><br />
                     <label>Special Needs or Requests:</label>

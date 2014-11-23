@@ -1,7 +1,10 @@
 <?php
+session_start();
+$_SESSION['id'] = 27; //placeholder
 $root_DIR = "../../";
 include_once $root_DIR.'includes/db_connect.php';
 include_once $root_DIR . 'includes/schedule_functions.php';
+include_once $root_DIR . 'includes/session_functions.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,9 +13,10 @@ include_once $root_DIR . 'includes/schedule_functions.php';
     <script type="text/javascript" src="<?php echo $DIR; ?>/js/handlebars-v2.0.0.js"></script>
     <link href="<?php echo $DIR ?>/css/core.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $DIR ?>/css/schedule.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $DIR ?>/css/UI-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css"/>
     <script src="<?php echo $DIR ?>/js/jquery.js"> </script>
+    <script src="<?php echo $DIR ?>/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="<?php echo $DIR ?>/js/main.js"></script>
-    <script src="<?php echo $DIR ?>/js/selectSchedule.js"></script>
     <title>View Schedule</title>
 </head>
 <body>
@@ -22,12 +26,14 @@ include_once $root_DIR . 'includes/schedule_functions.php';
         <?php include $root_DIR.'includes/overlay-template.php'; ?>
     </div>
 </div>
+<script src="<?php echo $DIR ?>/js/selectSchedule.js"></script>
 <div id="wrapper">
     <div id="container">
         <?php
         include $root_DIR.'includes/header.php';
+        schedule::time_to_JS(schedule::getTimes(1));
         schedule::to_JS(schedule::getSchedule(1));
-
+        schedule::location_to_JS(schedule::generateLocation());
         ?>
         <div id="content">
             <h2 id="todayTitle"></h2>
@@ -77,7 +83,8 @@ include_once $root_DIR . 'includes/schedule_functions.php';
     </div>
 </div>
 <script>
-    displayUnavailableSlots(arraySchedule);
+    var id = <?php echo $_SESSION['id'] ?>;
+    displayUnavailableSlots(arraySchedule, id);
 </script>
 </body>
 </html>

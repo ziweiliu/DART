@@ -20,6 +20,33 @@ class schedule {
         }
         return $html;
     }
+
+    public static function getTimes($day_id){
+        global $con;
+        $time_block = [];
+        $days_array = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+        $day_desc = $days_array[$day_id - 1];
+        $sql = "SELECT timeblock_id, TIME_FORMAT(start_time, '%H:%i') as start_time, TIME_FORMAT(end_time, '%H:%i') as end_time FROM schedule_timeblock";
+        $result = mysqli_query($con, $sql);
+        if (!$result){
+            exit (mysqli_error($con));
+        }
+        while ($r = mysqli_fetch_assoc($result)) {
+            for ($k = 1; $k < 3; $k++){
+                $array_info = array('day_id'=>$day_id, 'cart_id'=>$k, 'day_desc'=>$day_desc);
+                array_push($time_block, array_merge($r, $array_info));
+            }
+        }
+        return $time_block;
+    }
+    public static function time_to_JS($time_block){
+        $times_json = json_encode($time_block);
+        ?>
+        <script>
+            var arrayTimes = <?php echo $times_json; ?>;
+        </script>
+    <?php
+    }
     public static function generateLayout($cart_id, $col){
         $html = "<div class = 'info' style='height:20px'>DART $cart_id</div>";
         $max = ($col-1)*12 + 12;
@@ -48,8 +75,28 @@ class schedule {
         ?>
         <script>
             var arraySchedule = <?php echo $schedule_json; ?>;
-            console.log(arraySchedule);
         </script>
         <?php
+    }
+    public static function generateLocation(){
+        global $con;
+        $arrayLocations = [];
+        $sql = "SELECT * FROM building_locations";
+        $result = mysqli_query($con, $sql);
+        if (!$result){
+            exit (mysqli_error($con));
+        }
+        while ($r = mysqli_fetch_array($result)){
+            array_push($arrayLocations, $r['location_abbr']."-".$r['location_desc']);
+        }
+        return $arrayLocations;
+    }
+    public static function location_to_JS($arrayLocation){
+        $location_json = json_encode($arrayLocation);
+        ?>
+        <script>
+            var arrayLocation = <?php echo $location_json; ?>;
+        </script>
+    <?php
     }
 }

@@ -12,7 +12,6 @@ function populateSchedule(schedule){
         info += "Cell: " + schedule[i].cell + "<br />";
         $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").html(info);
         $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").css("background-color", "red");
-        console.log($("[data-attr='" + timeblock + "']").html());
     }
 }
 

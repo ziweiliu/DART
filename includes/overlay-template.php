@@ -1,84 +1,59 @@
 <script id="overlay-template" type="template">
-    <div id="display-preview">
-        <img id="preview-main" src="../objects/{{images.[0].image_filepath}}" />
-        <div id="display-thumbnails">
-            {{#each images}}
-            <div class="thumbnail-icon">
-                <img class="icon-img" src="../objects/{{this.image_filepath}}"/>
-                <div class="icon-state"></div>
-            </div>
-            {{/each}}
-        </div>
-    </div><!-- end div#display-preview -->
-
-    <div id="display-info">
-        <div id="info-name">{{name}}</div>
-        <div id="info-collection">from the <a class="standout hover" href="#collection">{{collection_name}}</a> collection</div>
-        <div id="info-designer">designed by <a class="standout hover" href="#designer">{{designer_first_name}} {{designer_last_name}}</a></div>
-        <div id="info-category">
-            <a class="standout hover" href="#category">{{category}}</a> - <a class="standout hover" href="#subcategory">{{subcategory}}</a>
-        </div>
-        <div id="info-description">{{description}}</div>
-    </div><!-- end div#display-info -->
-
-    <div id="display-form">
-        <form method="get">
-
-            <div id="form-size" class="form-grp">
-                <div class="form-label">What size would you like your object in?</div>
-
-                {{#each size_array}}
-                <label class="radio-label">
-                    <input class="radio-input" type="radio" name="size" value="{{this}}"/>
-                    <span>{{this}}</span>
-                </label>
-                {{/each}}
-
-                <div class="clear"></div>
-            </div>
-
-            <div id="form-material" class="form-grp">
-                <div class="form-label">What material would you like your object to be made from?</div>
-
-                {{#each material_array}}
-                <label class="radio-label">
-                    <input class="radio-input" type="radio" name="material-id" value="{{mat_id}}"/>
-                    <span>{{mat_name}}</span>
-                </label>
-                {{/each}}
-
-                <div class="clear"></div>
-            </div>
-
-            {{#if accessory_array}}
-            <div id="form-accesory" class="form-grp">
-                <div class="form-label">Would you like to add an accessory?</div>
-                <select class="select-input" name="accessory-id">
-                    <option value="none">none</option>
-                    <option value="1">10in silver necklace</option>
-                    <option value="2">14in silver necklace</option>
-                    <option value="3">16in leather necklace</option>
-                </select>
-            </div>
-            {{/if}}
-
-            <div id="form-price" class="form-grp bb-1 bt-1"><span id="price-update"></span></div>
-
-            {{#ifEqual type 1}}
-            <div id="design-btn">
-                <input type="hidden" name="detail_id" value=""/>
-                <button type="submit" formmethod="GET" formaction="../purchase/index.php" onclick="">BUY</button>
-                <button type="submit" formmethod="GET" formaction="../enable/request/index.php">DESIGN</button>
-                <div id="form-info">BUY ORDERS OBJECT AS IS.</div>
-            </div>
-            {{else}}
-            <div id="unique-btn">
-                <input type="hidden" name="detail_id" value=""/>
-                <button type="submit" formmethod="GET" formaction="../purchase/index.php">BUY</button>
-            </div>
-            {{/ifEqual}}
+    <?php
+    $customer_info = session::getCustomerInfo($_SESSION['id']);
+    $firstName = $customer_info['firstName'];
+    if ($customer_info['nickName']!= ""){
+        $firstName = $customer_info['nickName'];
+    }
+    ?>
+    <div id="overlay-info">
+        <form method="POST" action="submit.php">
+            <h3>Adding to the schedule for:</h3>
+            <label>Name: </label><?php echo $firstName." ".$customer_info['lastName']; ?>
+            <br />
+            <label>Cart Number: </label>DART <input type="text" readonly class="readonly" name="cart_id" value="{{cart_id}}" />
+            <br />
+            <label>Day of the Week: </label><input type="text" readonly class="readonly" value="{{day_desc}}" /><input type="hidden" name="day_id" value="{{day_id}}" />
+            <br />
+            <label>Pick-up Time: </label><input type="text" readonly class="readonly" value="{{start_time}}" /><input type="hidden" name="timeblock_id" value="{{timeblock_id}}" />
+            <br />
+            <label>Drop-off Time: </label><input type="text" readonly class="readonly" value="{{end_time}}" />
+            <br />
+            <label>Pick-up Location:</label><input name = "pu-loc" id="pu-loc" size="30"/>
+            <br />
+            <label>Drop-off Location:</label><input name = "do-loc" id="do-loc" size="30"/>
+            <br />
+            <input type="submit" value="Submit Request" />
         </form>
-    </div><!-- div#display-form -->
+    </div>
 
     <div class="clear"></div>
+</script>
+<script>
+    $("#overlay").on("click", "#pu-loc", function(){
+        $(this).autocomplete({
+            source: arrayLocation,
+            change: function(event,ui)
+            {
+                if (ui.item==null)
+                {
+                    $("#pu-loc").val('');
+                    $("#pu-loc").focus();
+                }
+            }
+        })
+    });
+    $("#overlay").on("click", "#do-loc", function(){
+        $(this).autocomplete({
+            source: arrayLocation,
+            change: function(event,ui)
+            {
+                if (ui.item==null)
+                {
+                    $("#do-loc").val('');
+                    $("#do-loc").focus();
+                }
+            }
+        })
+    });
 </script>

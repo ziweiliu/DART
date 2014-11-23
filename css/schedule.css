@@ -42,7 +42,7 @@
     overflow:hidden;
 }
 label{
-    width: 40px;
+    width: 150px;
     float: left;
 }
 div {
@@ -64,15 +64,14 @@ div {
 }
 #overlay {
     position: fixed;
-    top: 5%;
-    left: 25%;
-    height: 50%; width: 50%;
+    top: 10%;
+    left: 10%;
+    height: 80%; width: 80%;
     z-index: 100;
     overflow-y: scroll;
 }
 #overlay-display {
     position: relative;
-    width: 1000px;
     margin: 100px auto;
     padding: 30px;
     background-color: #FFF;

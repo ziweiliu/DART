@@ -58,19 +58,12 @@ if (!empty($_POST['firstName'])) {
     //Actually submits the form
     else {
         //Minor edits to include pdf format and increased size
-        $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf");
+        $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf", "doc", "docx");
         $temp = explode(".", $_FILES["file"]["name"]);
         $extension = end($temp);
         $date = date("y-m-d");
 
-        if ((($_FILES["file"]["type"] == "image/gif")
-                || ($_FILES["file"]["type"] == "image/jpeg")
-                || ($_FILES["file"]["type"] == "image/jpg")
-                || ($_FILES["file"]["type"] == "image/pjpeg")
-                || ($_FILES["file"]["type"] == "image/x-png")
-                || ($_FILES["file"]["type"] == "image/png")
-                || ($_FILES["file"]["type"] == "application/pdf"))
-            && ($_FILES["file"]["size"] < 80000000)
+        if (($_FILES["file"]["size"] < 80000000)
             && ($_FILES["file"]["size"] > 5)
             && in_array($extension, $allowedExts)) {
             if ($_FILES["file"]["error"] > 0) {
