@@ -60,13 +60,16 @@ class schedule {
     public static function getSchedule($day_id){
         global $con;
         $schedule = [];
-        $sql = "SELECT event_id, schedule_event.cust_id, timeblock_id, start_loc, end_loc, cart_id, firstName, lastName, nickName, cell FROM schedule_event, customers WHERE dayofweek_id = $day_id AND customers.cust_id = schedule_event.cust_id";
+        $days_array = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+        $day_desc = $days_array[$day_id - 1];
+        $sql = "SELECT event_id, schedule_event.cust_id, schedule_timeblock.timeblock_id, start_loc, end_loc, cart_id, firstName, lastName, nickName, cell, TIME_FORMAT(start_time, '%H:%i') as start_time, TIME_FORMAT(end_time, '%H:%i') as end_time FROM schedule_event, customers, schedule_timeblock WHERE dayofweek_id = $day_id AND customers.cust_id = schedule_event.cust_id AND schedule_timeblock.timeblock_id = schedule_event.timeblock_id AND isActive = 1";
         $result = mysqli_query($con, $sql);
         if (!$result){
             exit (mysqli_error($con));
         }
         while ($r = mysqli_fetch_assoc($result)){
-            array_push($schedule, $r);
+            $array_info = array('day_id'=>$day_id, 'day_desc'=>$day_desc);
+            array_push($schedule, array_merge($r, $array_info));
         }
         return $schedule;
     }

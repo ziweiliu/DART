@@ -15,40 +15,59 @@ function displayUnavailableSlots(schedule, id){
             info += "Cell: " + schedule[i].cell + "<br />";
             $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").html(info);
             $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").css("background-color", "yellow");
+            $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").attr("data-avail", "self");
         }
 
     }
 }
 
-var template = Handlebars.compile($('#overlay-template').html());
-var renderOverlay = function(cart_id,timeblock_id){
+var template = Handlebars.compile($('#overlay-template-others').html());
+var template_self = Handlebars.compile($('#overlay-template-self').html());
+var renderOverlay = function(cart_id,timeblock_id, isSelf){
     var html = "";
-    var i = 0;
-    for (var k = 0; k < arrayTimes.length; k++){
-        if (arrayTimes[k]['timeblock_id'] == timeblock_id && arrayTimes[k]['cart_id'] == cart_id){
-            var i = k;
+    if (isSelf == "false"){
+        var i = 0;
+        for (var k = 0; k < arrayTimes.length; k++){
+            if (arrayTimes[k]['timeblock_id'] == timeblock_id && arrayTimes[k]['cart_id'] == cart_id){
+                var i = k;
+            }
         }
+        html = template(arrayTimes[i]);
     }
-    html = template(arrayTimes[i]);
+    else if (isSelf=="true"){
+        console.log(arraySchedule);
+        var i = 0;
+        for (var k = 0; k < arraySchedule.length; k++){
+            if (arraySchedule[k]['timeblock_id'] == timeblock_id && arraySchedule[k]['cart_id'] == cart_id){
+                var i = k;
+            }
+        }
+        html = template_self(arraySchedule[i]);
+    }
+
     return html;
-}
+};
 var displayOverlay = function(html){
     $('#overlay-display').html(html);
-}
+};
 $(document).ready(function(){
     $(".info").on("click", function(){
+        var timeblock_id = $(this).attr('data-attr');
+        var cart_id = $(this).attr('data-cart');
         if ($(this).attr("data-avail")== "false"){
             alert("Sorry, this slot is already taken, please select another one.");
+        }
+        else if ($(this).attr("data-avail")== "self"){
+            $('#overlay')
+                .removeClass('hidden')
+                .addClass('shown');
+            displayOverlay(renderOverlay(cart_id, timeblock_id, "true"));
         }
         else {
             $('#overlay')
                 .removeClass('hidden')
                 .addClass('shown');
-
-            $('body').addClass('no-scroll');
-            var timeblock_id = $(this).attr('data-attr');
-            var cart_id = $(this).attr('data-cart');
-            displayOverlay(renderOverlay(cart_id, timeblock_id));
+            displayOverlay(renderOverlay(cart_id, timeblock_id, "false"));
         }
     });
     $('#overlay-close').on('click', function() {

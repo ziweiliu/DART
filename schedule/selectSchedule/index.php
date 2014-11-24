@@ -31,12 +31,15 @@ include_once $root_DIR . 'includes/session_functions.php';
     <div id="container">
         <?php
         include $root_DIR.'includes/header.php';
-        schedule::time_to_JS(schedule::getTimes(1));
-        schedule::to_JS(schedule::getSchedule(1));
+        $day_id = test_input($_GET['day_id']);
+        $arrayDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+        $day_desc = $arrayDays[$day_id - 1];
+        schedule::time_to_JS(schedule::getTimes($day_id));
+        schedule::to_JS(schedule::getSchedule($day_id));
         schedule::location_to_JS(schedule::generateLocation());
         ?>
         <div id="content">
-            <h2 id="todayTitle"></h2>
+            <h2 id="todayTitle"><?php echo $day_desc ?></h2>
             <div id="scheduleWrapper">
 
                 <div class="time-wrapper">

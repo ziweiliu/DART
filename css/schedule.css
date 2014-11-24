@@ -59,16 +59,13 @@ div {
     display: block;
     opacity: 1;
 }
-.no-scroll {
-    overflow: hidden;
-}
 #overlay {
     position: fixed;
     top: 10%;
     left: 10%;
     height: 80%; width: 80%;
     z-index: 100;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 #overlay-display {
     position: relative;
@@ -82,5 +79,6 @@ div {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: 101;
-    background-color: #222222;
+    background-color: #000000;
+    opacity: 0.9;
 }
