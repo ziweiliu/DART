@@ -97,9 +97,9 @@ if (!isset($_SESSION['uscID'])) {//Session not started
                         if ($row3['review_status'] == 1) {
                             echo "<label>File Status: </label><span style='color: green'>Approved with expiration date of " . $row3['file_exp_date'] . "</span><br />";
                         } else {
-                            if ($_SESSION['isAdmin']==true){
+                            if ($_SESSION['isAdmin'] == true) {
                                 echo "<label>File Status:</label><a href='reviewNote.php?document_id=" . $row3['document_id'] . "'><span style='color: red'>Pending, click here to review</span></a>";
-                            }else {
+                            } else {
                                 echo "<label>File Status:</label><span style='color: red'>Pending review</span>";
                             }
 
