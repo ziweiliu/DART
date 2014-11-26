@@ -92,6 +92,8 @@ include('../../includes/header.php');
                     <label>End Date of Service:</label>
                     <input type="text" name="endDate" id="datepicker2" /> <br />
                     <input type="checkbox" name="longTerm" value="1"/>This request is for longer than 60 days and I have explained the situation under Speical Needs or Requests.<br />
+                    <label>Password:</label>
+                    <input type="password" name="password" required /><br />
                     <span class="warning">All customers are required to submit a valid Doctor's certification. It can be attached electronically here or hand-delivered to the office within five business days of the initial request for services."</span><br />
                     <label for="file">Filename:</label>
                     <input type="file" name="file" id="file"><br />

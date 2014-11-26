@@ -37,6 +37,7 @@ if (!empty($_POST['firstName'])) {
     $specialNeeds= test_input($_POST["specialNeeds"]);
     $startDate = test_input($_POST["startDate"]);
     $endDate = test_input($_POST["endDate"]);
+    $password = md5($_POST['password']);
     if (isset($_POST["longTerm"])){
         $longTerm = 1;
     }
