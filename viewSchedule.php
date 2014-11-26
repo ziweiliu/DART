@@ -2,28 +2,30 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link href="css/UI-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
-    <link href="css/core.css" rel="stylesheet" type="text/css" />
-    <script src="js/jquery.js"> </script>
+    <link href="css/UI-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="css/core.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery.js"></script>
     <script src="js/jquery-ui-1.10.4.custom.js"></script>
     <script src="js/main.js"></script>
     <title>View Schedule</title>
     <style>
-        .info{
+        .info {
             width: 100%;
             height: 100px;
             float: left;
             font-size: 14px;
             line-height: 25px;
             -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-            -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-            box-sizing: border-box;         /* Opera/IE 8+ */
+            -moz-box-sizing: border-box; /* Firefox, other Gecko */
+            box-sizing: border-box; /* Opera/IE 8+ */
             padding-left: 10px;
         }
-        .info:hover{
+
+        .info:hover {
             background-color: #cccccc;
         }
-        .time{
+
+        .time {
             width: 100%;
             height: 60px;
             float: left;
@@ -31,21 +33,25 @@
             font-size: 14px;
             padding-top: 38px;
         }
-        #timeCol1, #timeCol2{
+
+        #timeCol1, #timeCol2 {
             width: 10%;
             float: left;
         }
-        #dart1Col1, #dart2Col1, #dart1Col2, #dart2Col2{
+
+        #dart1Col1, #dart2Col1, #dart1Col2, #dart2Col2 {
             width: 20%;
             float: left;
         }
-        #scheduleWrapper{
+
+        #scheduleWrapper {
             height: 2560px;
             width: 80%;
             margin: 0px auto;
             background-color: white;
         }
-        label{
+
+        label {
             width: 40px;
             float: left;
         }
@@ -59,13 +65,14 @@
 <div id="wrapper">
     <div id="container">
         <?php
-            include('includes/header.php');
+        include('includes/header.php');
         ?>
         <div id="content">
             <div id="light"></div>
-            <div id="dark" onClick = "finishEdit()"></div>
+            <div id="dark" onClick="finishEdit()"></div>
             <div id="scheduleWrapper">
                 <h2 id="todayTitle"></h2>
+
                 <div id="timeCol1">
                 </div>
                 <div id="dart1Col1">

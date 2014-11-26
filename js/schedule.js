@@ -1,9 +1,9 @@
-function populateSchedule(schedule){
-    for (var i = 0; i < schedule.length; i++){
+function populateSchedule(schedule) {
+    for (var i = 0; i < schedule.length; i++) {
         var timeblock = schedule[i].timeblock_id;
         var firstName = schedule[i].firstName;
         var cart_id = schedule[i].cart_id;
-        if (schedule[i].nickName != ''){
+        if (schedule[i].nickName != '') {
             firstName = schedule[i].nickName;
         }
         var info = "Name: " + firstName + " " + schedule[i].lastName + "<br />";
