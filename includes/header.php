@@ -20,10 +20,10 @@
                         <a href="<?php echo $DIR ?>/index.php">Home</a>
                     </li>
                     <li>
-                        <a href="<?php echo $DIR ?>/customer/index.php">Customer</a>
+                        <a href="<?php echo $DIR ?>/customer/viewCustomer/index.php">Customer</a>
                         <ul>
                             <li>
-                                <a href="<?php echo $DIR ?>/customer/newCustomer/index.php">New Customer</a>
+                                <a href="<?php echo $DIR ?>/customer/viewCustomer/index.php">Edit My Information</a>
                             </li>
                         </ul>
                     </li>

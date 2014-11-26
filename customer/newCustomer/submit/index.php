@@ -53,7 +53,7 @@ if (!empty($_POST['firstName'])) {
         $duplicate = true;
     }
     if ($duplicate == true) {
-        //echo "<script>alert('This USC ID has already been registered. Please contact the USC Transportation Office.')</script>";
+        echo "<script>alert('This USC ID has already been registered. Please contact the USC Transportation Office.')</script>";
     } //Actually submits the form
     else {
         //Minor edits to include pdf format and increased size
@@ -95,13 +95,17 @@ if (!empty($_POST['firstName'])) {
         if (!mysqli_query($con, $sqlAddr)) {
             exit('Error: ' . mysqli_error($con));
         }
+        $sqlUser = "INSERT INTO user (password, uscID) VALUES ('$password', '$uscID')";
+        if (!mysqli_query($con, $sqlUser)) {
+            exit('Error: ' . mysqli_error($con));
+        }
         $sqlDoc = "INSERT INTO customers_doc (cust_id, filename) VALUES ('$cust_id', '$fileName')";
         if (!mysqli_query($con, $sqlDoc)) {
             exit ('Error:' . mysqli_error($con));
         }
         echo "<div id='wrapper'><div id='container'>";
         include $root_DIR . 'includes/header.php';
-        echo "<div id='content'><div id='innerContent'><h4>Application Successful</h4><span>Your request has been submitted. Please note that it may take up to 48 hours to approve your application. You may now select a tentative schedule based on current availabilities on the next page.</span><br /><a href='selectSchedule.php'><h4>Click here to view current availabilities<h4></a></div></div></div></div>";
+        echo "<div id='content'><div id='innerContent'><h4>Application Successful</h4><span>Your request has been submitted. Please note that it may take up to 48 hours to approve your application. You may now login to your account on the next page and select a tentative schedule.</span><br /><a href='../../../index.php'><h4>Click here to go back to the home page<h4></a></div></div></div></div>";
         include $root_DIR . 'includes/footer.php';
     }
 } else {

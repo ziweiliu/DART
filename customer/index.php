@@ -1,7 +1,15 @@
 <?php
+session_start();
 $root_DIR = "../";
 include_once $root_DIR . 'includes/db_connect.php';
 include_once $root_DIR . 'includes/customer_functions.php';
+include_once $root_DIR . 'includes/session_functions.php';
+
+if (!isset($_SESSION['uscID'])) {//Session not started
+    header("location: " . $DIR . "/index.php?message=error");
+} else if ($_SESSION['isAdmin'] == false) {//Admin only page
+    header("location: " . $DIR . "/index.php?message=error");
+}
 to_JS(parseCustomers($con));
 ?>
 <!DOCTYPE html>
