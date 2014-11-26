@@ -1,8 +1,9 @@
 <?php
 //this function takes the mysql customers table and changes it into a JS array for search and output purposes (to search without server connection)
-function parseCustomers($con){
+function parseCustomers($con)
+{
     $r = mysqli_query($con, "SELECT * FROM customers");
-    if (!$r){
+    if (!$r) {
         echo mysqli_error($con);
     }
     $customers = [];
@@ -11,7 +12,9 @@ function parseCustomers($con){
     }
     return $customers;
 }
-function to_JS($customers){
+
+function to_JS($customers)
+{
     $arrayCustomers = json_encode($customers);
     ?>
     <script>
@@ -22,15 +25,19 @@ function to_JS($customers){
 }
 
 
-function generateStateSelect($name, $con){
+function generateStateSelect($name, $con)
+{
     $html = "<select name='$name'>";
     $sql = "SELECT * FROM state";
     $result = mysqli_query($con, $sql);
-    if (!$result){
+    if (!$result) {
         exit (mysqli_error($con));
     }
-    while ($r = mysqli_fetch_array($result)){
-        $html = $html . "<option value = ".$r['abbreviation'].">".$r['name']."</option>";
+    while ($r = mysqli_fetch_array($result)) {
+        $html = $html . "<option value = " . $r['abbreviation'] . ">" . $r['name'] . "</option>";
+        if ($r['abbreviation'] == "CA") {
+            $html = $html . "<option value = " . $r['abbreviation'] . " selected >" . $r['name'] . "</option>";
+        }
     }
     $html = $html . "</select>";
     return $html;
