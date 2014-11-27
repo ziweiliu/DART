@@ -100,6 +100,7 @@ if (!isset($_SESSION['uscID'])) {//Session not started
 </div>
 <script>
     var id = <?php echo $cust_id ?>;
+    console.log(id);
     displayUnavailableSlots(arraySchedule, id);
 </script>
 </body>

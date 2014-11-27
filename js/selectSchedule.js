@@ -18,7 +18,9 @@ function displayUnavailableSlots(schedule, id) {
             $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").attr("data-avail", "self");
         }
 
+
     }
+    console.log(schedule);
 }
 
 var template = Handlebars.compile($('#overlay-template-others').html());

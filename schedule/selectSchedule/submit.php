@@ -10,7 +10,7 @@ include_once '../../includes/db_connect.php';
 if (empty($_POST['timeblock_id'])) {
     header("location: index.php");
 }
-$cust_id = $_SESSION['id'];
+$cust_id = $_SESSION['customerInfo']['cust_id'];
 $cart_id = test_input($_POST['cart_id']);
 $timeblock_id = test_input($_POST['timeblock_id']);
 $day_id = test_input($_POST['day_id']);
