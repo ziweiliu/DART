@@ -21,7 +21,7 @@ $specialNeeds = test_input($_POST["specialNeeds"]);
 $startDate = test_input($_POST["startDate"]);
 $endDate = test_input($_POST["endDate"]);
 
-$sql = "UPDATE customers SET salutation = '$salutation', firstName = '$firstName', lastName = '$lastName', middleName = '$middleName', uscID = '$uscID', classification = '$classification', cell = '$cell', email = '$email', nature = '$nature', specialNeeds = '$specialNeeds', startDate = '$startDate', endDate = '$endDate' WHERE cust_id = '$cust_id'";
+$sql = "UPDATE customers SET salutation = '$salutation', firstName = '$firstName', lastName = '$lastName', middleName = '$middleName', nickName = '$nickName', uscID = '$uscID', classification = '$classification', cell = '$cell', email = '$email', nature = '$nature', specialNeeds = '$specialNeeds', startDate = '$startDate', endDate = '$endDate' WHERE cust_id = '$cust_id'";
 if (!mysqli_query($con, $sql)) {
     die('Error: ' . mysqli_error($con));
 }

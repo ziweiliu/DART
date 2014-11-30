@@ -10,7 +10,7 @@ if (!isset($_SESSION['uscID'])) {//Session not started
 } else if ($_SESSION['isAdmin'] == false) {//Admin only page
     header("location: " . $DIR . "/index.php?message=error");
 }
-to_JS(parseCustomers($con));
+customer::to_JS(customer::parseCustomers($con));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,21 +22,8 @@ to_JS(parseCustomers($con));
     <script src="<?php echo $DIR ?>/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="<?php echo $DIR ?>/js/main.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#inputSearchCustomer').on("keyup", function () {
-                displayCustomers(arrayCustomers);
-            });
-            $('#inputDisplayPast').on("click", function () {
-                displayCustomers(arrayCustomers);
-            });
-            $("tr").on("click", function () {
-                console.log("clicked");
-                if ($(this).data('href') !== undefined) {
-                    document.location = $(this).data('href');
-                }
-                ;
-            });
-        })
+
+        console.log(arrayCustomers);
     </script>
     <title>Index</title>
 </head>

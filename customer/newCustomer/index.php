@@ -13,7 +13,7 @@ include_once $root_DIR . '/includes/customer_functions.php';
     <script src="<?php echo $DIR ?>/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="<?php echo $DIR ?>/js/main.js"></script>
     <script>
-        $().ready(function () {
+        $(document).ready(function () {
             $("#datepicker1").datepicker({
                 minDate: 0,
                 dateFormat: "yy-mm-dd",
@@ -81,7 +81,7 @@ include('../../includes/header.php');
                     <input type="text" name="city" required/><br/>
                     <label>State:</label>
                     <?php
-                    echo generateStateSelect("state", $con);
+                    echo customer::generateStateSelect("state", $con);
                     ?><br/>
                     <label>Zipcode:</label>
                     <input type="text" name="zip" maxlength="5" required/><br/>

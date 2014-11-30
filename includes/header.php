@@ -50,6 +50,9 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="<?php echo $DIR ?>/schedule/scheduleByCustomer/index.php">View My Schedule</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -95,6 +98,9 @@
                                         <a href="<?php echo $DIR ?>/schedule/viewSchedule/index.php?day_id=5">Friday</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="<?php echo $DIR ?>/schedule/scheduleByCustomer/index.php">View by Customer</a>
                             </li>
                         </ul>
                     </li>
