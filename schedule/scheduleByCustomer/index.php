@@ -45,11 +45,18 @@ $arrayInfo = schedule::getAllSchedule($cust_id);
             <div id="innerContent">
                 <h2>Viewing all scheduled services:</h2>
                 <table>
-                    <tr><th>Event ID</th><th>Day</th><th>Start Time</th><th>End Time</th><th>Start Location:</th><th>End Location</th></tr>
+                    <tr>
+                        <th>Event ID</th>
+                        <th>Day</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Start Location:</th>
+                        <th>End Location</th>
+                    </tr>
                     <?php
-                    for ($i = 0; $i < sizeof($arrayInfo); $i++){
+                    for ($i = 0; $i < sizeof($arrayInfo); $i++) {
                         echo "<tr>";
-                        echo "<td>".$arrayInfo[$i]['event_id']."</td><td>".$arrayInfo[$i]['day_description']."</td><td>".$arrayInfo[$i]['start_time']."</td><td>".$arrayInfo[$i]['end_time']."</td><td>".$arrayInfo[$i]['start_loc']."</td><td>".$arrayInfo[$i]['end_loc']."</td>";
+                        echo "<td>" . $arrayInfo[$i]['event_id'] . "</td><td>" . $arrayInfo[$i]['day_description'] . "</td><td>" . $arrayInfo[$i]['start_time'] . "</td><td>" . $arrayInfo[$i]['end_time'] . "</td><td>" . $arrayInfo[$i]['start_loc'] . "</td><td>" . $arrayInfo[$i]['end_loc'] . "</td>";
                         echo "</tr>";
                     }
                     ?>

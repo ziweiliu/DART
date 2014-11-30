@@ -61,7 +61,8 @@ session::init();
                 <h3>How to Request DART Service</h3>
 
                 <p>If this is your first time here, please fill out the <a href="customer/newCustomer/index.php">new
-                        customer application</a> and create an account. Otherwise, you may <a href="login/index.php">login</a>
+                        customer application</a> and create an account. Otherwise, you may
+                    <a href="login/index.php">login</a>
                     here to view and edit your schedule.</p>
 
                 <p>Please note that your application is not complete and will not be considered unless we also receive a

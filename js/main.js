@@ -15,7 +15,7 @@ function displayCustomers(arrayCustomers) {
             var d = arrayCustomers[i].endDate.split(/[-]/);
             var endDate = new Date(d[0], d[1] - 1, d[2]);
             var firstName = arrayCustomers[i].firstName;
-            if (arrayCustomers[i].nickName != ""){
+            if (arrayCustomers[i].nickName != "") {
                 firstName = arrayCustomers[i].nickName;
             }
             if (historical === false) {
@@ -51,8 +51,8 @@ function displayCustomers(arrayCustomers) {
     document.getElementById('displayCustomers').innerHTML = outputString;
 }
 
-$(document).ready(function() {
-    $("tr").on("click", function() {
+$(document).ready(function () {
+    $("tr").on("click", function () {
         if ($(this).data('href') !== undefined) {
             document.location = $(this).data('href');
         }

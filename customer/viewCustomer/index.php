@@ -95,10 +95,10 @@ if (!isset($_SESSION['uscID'])) {//Session not started
                     while ($row3 = mysqli_fetch_array($r3)) {
                         echo "<label>File Link: </label><a href='../../" . $row3['filename'] . "'>Document No. " . $row3['document_id'] . " submitted on " . $row3['file_submit_date'] . "</a><br />";
                         if ($row3['review_status'] == 1) {
-                            echo "<label>File Status: </label><span style='color: green'>Approved with expiration date of " . $row3['file_exp_date'] . "</span><br />";
+                            echo "<label>File Status: </label><a href='../reviewNote/index.php?doc_id=" . $row3['document_id'] . "'><span style='color: green'>Approved with expiration date of " . $row3['file_exp_date'] . "</span></a><br />";
                         } else {
                             if ($_SESSION['isAdmin'] == true) {
-                                echo "<label>File Status:</label><a href='reviewNote.php?document_id=" . $row3['document_id'] . "'><span style='color: red'>Pending, click here to review</span></a>";
+                                echo "<label>File Status:</label><a href='../reviewNote/index.php?doc_id=" . $row3['document_id'] . "'><span style='color: red'>Pending, click here to review</span></a>";
                             } else {
                                 echo "<label>File Status:</label><span style='color: red'>Pending review</span>";
                             }
