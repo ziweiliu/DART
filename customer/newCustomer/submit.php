@@ -1,7 +1,7 @@
 <?php
-$root_DIR = "../../../";
+$root_DIR = "../../";
 include_once $root_DIR . "includes/db_connect.php";
-include_once $root_DIR . "/includes/customer_functions.php";
+include_once $root_DIR . "includes/customer_functions.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +60,7 @@ if (!empty($_POST['firstName'])) {
         $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf", "doc", "docx");
         $temp = explode(".", $_FILES["file"]["name"]);
         $extension = end($temp);
-        $date = date("y-m-d");
+        $date = date("y-m-d-h-s");
 
         if (($_FILES["file"]["size"] < 80000000)
             && ($_FILES["file"]["size"] > 5)
@@ -69,11 +69,11 @@ if (!empty($_POST['firstName'])) {
             if ($_FILES["file"]["error"] > 0) {
                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
             } else {
-                if (file_exists("../../../upload/" . $lastName . "_" . $firstName . "_" . $date . "." . $extension)) {
+                if (file_exists("../../upload/" . $lastName . "_" . $firstName . "_" . $date . "." . $extension)) {
                     echo "<script>alert('The file you tried to upload already exists. Please contact the USC Transportation Office');</script>";
                 } else {
                     move_uploaded_file($_FILES["file"]["tmp_name"],
-                        "../../../upload/" . $lastName . "_" . $firstName . "_" . $date . "." . $extension);
+                        "../../upload/" . $lastName . "_" . $firstName . "_" . $date . "." . $extension);
                     $fileName = "upload/" . $lastName . "_" . $firstName . "_" . $date . "." . $extension;
                 }
             }
@@ -82,7 +82,30 @@ if (!empty($_POST['firstName'])) {
                 echo "<script>alert('The file size is too big to upload. Please print the note and hand deliver to the Transportation Office')</script>";
             }
         }
-        $sql = "INSERT INTO customers (salutation, firstName, lastName, middleName, nickName, uscID, classification, email, cell, nature, specialNeeds, startDate, endDate, longTerm, fileName) VALUES ('$salutation', '$firstName', '$lastName', '$middleName', '$nickName', '$uscID', '$classification', '$email', '$cell', '$nature', '$specialNeeds', '$startDate', '$endDate', '$longTerm', '$fileName')";
+        //pick out the next available color
+        $sql_color = "SELECT * FROM colors";
+        $color_array = [];
+        $color_hex = "placeholder";
+        $result = mysqli_query($con, $sql_color);
+        if (!$result){
+            exit (mysqli_error($con));
+        }
+        while ($r = mysqli_fetch_assoc($result)){
+            array_push($color_array, $r);
+        }
+        for ($i = 0; $i < sizeof($color_array); $i++){
+            if ($color_array[$i]['is_taken'] == 0 && $color_hex = "placeholder"){
+                $color_hex = $color_array[$i]['color_hex'];
+            }
+        }
+        if ($color_hex == "placeholder"){
+            $color_hex = $color_array[rand(0, 26)]['color_hex'];
+        }
+        $sql_color_update = "UPDATE colors SET is_taken = '1' WHERE color_hex = '$color_hex'";
+        if (!mysqli_query($con, $sql_color_update)) {
+            exit('Error: ' . mysqli_error($con));
+        }
+        $sql = "INSERT INTO customers (salutation, firstName, lastName, middleName, nickName, uscID, classification, email, cell, nature, specialNeeds, startDate, endDate, longTerm, color) VALUES ('$salutation', '$firstName', '$lastName', '$middleName', '$nickName', '$uscID', '$classification', '$email', '$cell', '$nature', '$specialNeeds', '$startDate', '$endDate', '$longTerm', '$color_hex')";
         if (!mysqli_query($con, $sql)) {
             exit('Error: ' . mysqli_error($con));
         }
@@ -105,11 +128,11 @@ if (!empty($_POST['firstName'])) {
         }
         echo "<div id='wrapper'><div id='container'>";
         include $root_DIR . 'includes/header.php';
-        echo "<div id='content'><div id='innerContent'><h4>Application Successful</h4><span>Your request has been submitted. Please note that it may take up to 48 hours to approve your application. You may now login to your account on the next page and select a tentative schedule.</span><br /><a href='../../../index.php'><h4>Click here to go back to the home page<h4></a></div></div></div></div>";
+        echo "<div id='content'><div id='innerContent'><h4>Application Successful</h4><span>Your request has been submitted. Please note that it may take up to 48 hours to approve your application. You may now login to your account on the next page and select a tentative schedule.</span><br /><a href='../../index.php'><h4>Click here to go back to the home page<h4></a></div></div></div></div>";
         include $root_DIR . 'includes/footer.php';
     }
 } else {
-    header('location: ../index.php');
+    header('location: index.php');
 }
 ?>
 

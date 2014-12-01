@@ -44,7 +44,7 @@ include('../../includes/header.php');
             <div id="form">
                 <h2>New Customer Registration</h2>
 
-                <form name="newCustomer" method="POST" action="submit/index.php" enctype="multipart/form-data">
+                <form method="POST" action="submit.php" enctype="multipart/form-data">
                     <label>Salutations:</label>
                     <select name="salutation">
                         <option value="Ms">Ms.</option>

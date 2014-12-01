@@ -28,8 +28,19 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="<?php echo $DIR ?>/document/index.php">Document</a>
+                        <ul>
+                            <li>
+                                <a href="<?php echo $DIR ?>/document/newDocument/index.php">Upload a new Document</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="<?php echo $DIR ?>/schedule/index.php">Schedule</a>
                         <ul>
+                            <li>
+                                <a href="<?php echo $DIR ?>/schedule/scheduleByCustomer/index.php">View Schedule</a>
+                            </li>
                             <li>
                                 <a href="#">Select Schedule</a>
                                 <ul>
@@ -50,9 +61,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="<?php echo $DIR ?>/schedule/scheduleByCustomer/index.php">View My Schedule</a>
-                            </li>
+
                         </ul>
                     </li>
                     <li>

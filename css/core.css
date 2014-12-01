@@ -1,17 +1,22 @@
+
 #container {
     width: 100%;
     min-width: 1250px;
+    height: 100%
 }
 
 #wrapper {
     width: 100%;
     margin: 0px auto;
+    min-height: 100%;
 
 }
 
 #content {
     padding: 10px;
     background-color: #CCCCCC;
+    min-height: 100%;
+
 }
 
 #header {
@@ -38,6 +43,10 @@ label {
 
 body {
     font-family: "Adobe Caslon Pro";
+    height: 100%;
+}
+html{
+    height: 100%;
 }
 
 h2 {
@@ -154,7 +163,7 @@ div.ui-datepicker {
 #menu ul ul ul {
     visibility: hidden;
     position: absolute;
-    left: 125%;
+    left: 100%;
     top: 0;
 }
 

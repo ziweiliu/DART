@@ -3,6 +3,7 @@ function populateSchedule(schedule) {
         var timeblock = schedule[i].timeblock_id;
         var firstName = schedule[i].firstName;
         var cart_id = schedule[i].cart_id;
+        var color = schedule[i].color;
         if (schedule[i].nickName != '') {
             firstName = schedule[i].nickName;
         }
@@ -11,7 +12,7 @@ function populateSchedule(schedule) {
         info += "DO Loc: " + schedule[i].end_loc + "<br />";
         info += "Cell: " + schedule[i].cell + "<br />";
         $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").html(info);
-        $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").css("background-color", "red");
+        $("[data-attr='" + timeblock + "'][data-cart='" + cart_id + "']").css("background-color", color);
     }
 }
 

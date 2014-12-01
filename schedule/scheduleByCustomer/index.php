@@ -68,7 +68,7 @@ $arrayInfo = schedule::getAllSchedule($cust_id);
         </div>
     </div>
     <?php include $root_DIR . 'includes/footer.php'; ?>
-</div>
+    </div>
 
 </body>
 </html>
