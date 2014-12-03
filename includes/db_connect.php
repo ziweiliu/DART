@@ -17,4 +17,5 @@ function test_input($data)
     return $data;
 }
 
-$DIR = "http://localhost:8080/DART";
+//$DIR = "http://localhost:8080/DART";
+$DIR = "http://ziweiliu.student.uscitp.com/DART";//live

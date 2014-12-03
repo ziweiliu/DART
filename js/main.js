@@ -1,5 +1,5 @@
-var DIR = "http://localhost:8080/DART"
-
+//var DIR = "http://localhost:8080/DART";
+var DIR = "http://ziweiliu.student.uscitp.com/DART";//live
 //this function takes the arrayCustomers parsed by "parseCustomers()" function in customer_functions.php and outputs the list of customers matching the criteria
 //To-do: add "click" functionalities using _POST?
 function displayCustomers(arrayCustomers) {
