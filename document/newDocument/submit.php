@@ -1,5 +1,6 @@
 <?php
 include_once "../../includes/db_connect.php";
+include_once "../../includes/email_functions.php";
 
 $cust_id = test_input($_POST['cust_id']);
 $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf", "doc", "docx");
@@ -34,5 +35,6 @@ $sqlDoc = "INSERT INTO customers_doc (cust_id, filename) VALUES ('$cust_id', '$f
 if (!mysqli_query($con, $sqlDoc)) {
     exit ('Error:' . mysqli_error($con));
 }
+email::sendCustomerEmail($cust_id, 2);
 
 header("location: $DIR/customer/viewCustomer/index.php");

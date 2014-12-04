@@ -37,7 +37,7 @@ class customer
     public static function getDocumentInfo($doc_id)
     {
         global $con;
-        $sql = "SELECT firstName, lastName, nickName, uscID, classification, email, filename, startDate, endDate, longTerm, file_submit_date, file_exp_date, review_status, review_date, deny_reason, comment FROM customers_doc, customers WHERE document_id = $doc_id AND customers_doc.cust_id = customers.cust_id";
+        $sql = "SELECT customers.cust_id, firstName, lastName, nickName, uscID, classification, email, filename, startDate, endDate, longTerm, file_submit_date, file_exp_date, review_status, review_date, deny_reason, comment FROM customers_doc, customers WHERE document_id = $doc_id AND customers_doc.cust_id = customers.cust_id";
         $result = mysqli_query($con, $sql);
         if (!$result) {
             exit (mysqli_error($con));

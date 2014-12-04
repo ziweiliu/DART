@@ -2,6 +2,7 @@
 $root_DIR = "../../";
 include_once $root_DIR . "includes/db_connect.php";
 include_once $root_DIR . "includes/customer_functions.php";
+include_once $root_DIR . "includes/email_functions.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,6 +131,7 @@ if (!empty($_POST['firstName'])) {
         include $root_DIR . 'includes/header.php';
         echo "<div id='content'><div id='innerContent'><h4>Application Successful</h4><span>Your request has been submitted. Please note that it may take up to 48 hours to approve your application. You may now login to your account on the next page and select a tentative schedule.</span><br /><a href='../../index.php'><h4>Click here to go back to the home page<h4></a></div></div></div></div>";
         include $root_DIR . 'includes/footer.php';
+        email::sendCustomerEmail($cust_id, 1);
     }
 } else {
     header('location: index.php');

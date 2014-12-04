@@ -96,3 +96,25 @@ div {
     background-color: #000000;
     opacity: 0.9;
 }
+h2{
+    padding: 0;
+    margin: 0;
+}
+
+@media print{
+    @page {
+        size: landscape;
+    }
+    body {
+        writing-mode: tb-rl;
+        margin: 0px auto;
+        -webkit-print-color-adjust:exact;
+    }
+    #header{
+        display: none;
+    }
+    #footer {
+        display: none;
+    }
+
+}

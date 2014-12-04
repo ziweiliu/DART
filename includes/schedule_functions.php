@@ -133,4 +133,9 @@ class schedule
         }
         return $arrayInfo;
     }
+    public static function getDayDesc($day_id){
+        $days_array = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+        $day_desc = $days_array[$day_id - 1];
+        return $day_desc;
+    }
 }

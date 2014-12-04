@@ -28,7 +28,7 @@ $day_id = test_input($_GET['day_id']);
 
         ?>
         <div id="content">
-            <h2 id="todayTitle"></h2>
+            <h2><?php echo schedule::getDayDesc($day_id)?></h2>
 
             <div id="light"></div>
             <div id="dark" onClick="finishEdit()"></div>

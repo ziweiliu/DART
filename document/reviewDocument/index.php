@@ -110,6 +110,7 @@ $doc_info = customer::getDocumentInfo($doc_id);
                     <label>Deny Reason: </label><textarea name="denyReason" id="denyReason"><?php echo $doc_info['deny_reason']; ?></textarea><br/>
                     <label>Comment(optional): </label><textarea name="comment"><?php echo $doc_info['comment']; ?></textarea><br/>
                     <label>Document Expiration Date: </label><input type="text" name="expDate" id="expDate" value="<?php echo $doc_info['file_exp_date']?>"/><br/>
+                    <input type="hidden" name="cust_id" value="<?php echo $doc_info['cust_id']?>" />
                     <span id="warning"></span>
                     <input type="submit" value="Submit">
                 </form>

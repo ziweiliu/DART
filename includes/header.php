@@ -114,7 +114,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo $DIR ?>/user/index.php">User</a>
+                        <a href="<?php echo $DIR ?>/admin/index.php">Admin</a>
                     </li>
                     <li>
                         <a href="<?php echo $DIR ?>/login/logout.php">Log out</a>
