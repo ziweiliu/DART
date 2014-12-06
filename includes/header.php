@@ -108,9 +108,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="<?php echo $DIR ?>/schedule/scheduleByCustomer/index.php">View by Customer</a>
-                            </li>
                         </ul>
                     </li>
                     <li>

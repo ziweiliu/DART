@@ -5,7 +5,7 @@
  * Date: 12/4/2014
  * Time: 12:15 PM
  */
-
+include_once "customer_functions.php";
 class admin{
     public static function customerStats($statName){
         global $con;
@@ -143,5 +143,59 @@ class admin{
                 break;
         }
         return $output;
+    }
+    public static function getPendingCustomers(){
+        global $con;
+        global $DIR;
+        $html = "";
+        $n = customer::parseCustomers($con);
+        for ($i = 0; $i < sizeOf($n); $i++){
+            if ($n[$i]['isapproved'] == 0){
+                $html .="<tr data-href='$DIR/customer/viewCustomer/?cust_id=".$n[$i]['cust_id']."'><td>".$n[$i]['firstName']."</td><td>".$n[$i]['lastName']."</td><td>".$n[$i]['uscID']."</td><td>".$n[$i]['cell']."</td><td>".$n[$i]['email']."</td><td>".$n[$i]['startDate']."</td><td>".$n[$i]['endDate']."</td>";
+            }
+        }
+        return $html;
+    }
+    public static function getPendingDocuments(){
+        global $con;
+        global $DIR;
+        $array = [];
+        $html = "";
+        $sql = "SELECT * FROM customers, customers_doc where customers.cust_id = customers_doc.cust_id";
+        $result = mysqli_query($con, $sql);
+        if (!$result){
+            exit (mysqli_error($con));
+        }
+        while ($r = mysqli_fetch_assoc($result)){
+            array_push($array, $r);
+        }
+        for ($i = 0; $i < sizeof($array); $i++) {
+            if ($array[$i]['review_status'] == 0) {
+                $html .= "<tr><td>" . $array[$i]['firstName'] . "</td><td>" . $array[$i]['lastName'] . "</td><td>" . $array[$i]['uscID'] . "</td><td><a href='$DIR/" . $array[$i]['filename'] . "'>" . $array[$i]['filename'] . "</a></td><td>" . $array[$i]['file_submit_date'] . "</td><td><a href='$DIR/document/reviewDocument/index.php?doc_id=" . $array[$i]['document_id'] . "'>Click Here to Review </a></td></td></tr>";
+            }
+        }
+        return $html;
+    }
+    public static function getCustomersWithExpiringDocuments(){
+        global $con;
+        global $DIR;
+        $array = [];
+        $html = "";
+        $sql = "SELECT * FROM customers, customers_doc where customers.cust_id = customers_doc.cust_id AND review_status = 1";
+        $result = mysqli_query($con, $sql);
+        if (!$result){
+            exit (mysqli_error($con));
+        }
+        while ($r = mysqli_fetch_assoc($result)){
+            array_push($array, $r);
+        }
+        for ($i = 0; $i < sizeof($array); $i++){
+            $file_exp_date = date('Y-m-d', strtotime($array[$i]['file_exp_date']));
+            $twoWeeks = date ('Y-m-d', strtotime("+2 weeks"));
+            if ($file_exp_date < $twoWeeks){
+                $html .= "<tr><td>".$array[$i]['firstName']."</td><td>".$array[$i]['lastName']."</td><td>".$array[$i]['uscID']."</td><td>".$array[$i]['endDate']."</td><td>".$array[$i]['file_exp_date']."</td><td></td><td><a href='".$DIR."/admin/sendEmail/index.php?cust_id=".$array[$i]['cust_id']."&template_id=4'>Click to send</a></td></tr>";
+            }
+        }
+        return $html;
     }
 }

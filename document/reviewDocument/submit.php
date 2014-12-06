@@ -25,5 +25,8 @@ if (!mysqli_query($con, $sql)){
 if ($status == 1){
     email::sendCustomerEmail($cust_id, 3);
 }
+else if ($status == 2){
+    email::sendCustomerEmail($cust_id, 7, $deny_reason);
+}
 
 header("location: index.php?doc_id=$doc_id");

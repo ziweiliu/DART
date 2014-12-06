@@ -91,6 +91,21 @@ $doc_info = customer::getAlLDocuments($cust_id);
                     echo customer::generateStateSelect("state", $con);
                     ?><br/>
                     <input type='submit' value='Update Information' name='submit'/>
+                    <h4>Customer Status:</h4>
+                    <?php
+                    $status = $array_info['isapproved'];
+                    switch ($status){
+                        case 0:
+                            echo "<a href='".$DIR."/customer/approveCustomer/index.php?cust_id=".$cust_id."'><span style='color:blue'>Requires Approval</span></a>";
+                            break;
+                        case 1:
+                            echo "<a href='".$DIR."/customer/approveCustomer/index.php?cust_id=".$cust_id."'><span style='color:green'>Approved</span></a>";
+                            break;
+                        case 2:
+                            echo "<a href='".$DIR."/customer/approveCustomer/index.php?cust_id=".$cust_id."'><span style='color:red'>Denied</span></a>";
+                            break;
+                    }
+                    ?>
                     <h4>Doctor's Notes on File</h4>
                     <?php
                     for ($i = 0; $i < sizeof($doc_info); $i++) {

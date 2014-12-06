@@ -23,6 +23,11 @@ if (!isset($_SESSION['uscID'])) {//Session not started
     <script src="<?php echo $DIR ?>/js/main.js"></script>
     <script>
         $().ready(function () {
+            $("tr").on("click", function () {
+                if ($(this).data('href') !== undefined) {
+                    document.location = $(this).data('href');
+                }
+            });
             $("#datepicker1").datepicker({
                 minDate: 0,
                 dateFormat: "yy-mm-dd",
@@ -52,6 +57,22 @@ if (!isset($_SESSION['uscID'])) {//Session not started
         <div id="content">
             <div id="innerContent">
                 <h2>Admin Interface</h2>
+                <h3>Action Required:</h3>
+                <h4>Customers Pending Approval:</h4>
+                <table>
+                    <tr><th>First Name</th><th>Last Name</th><th>ID Number</th><th>Phone Number</th><th>E-mail Address</th><th>Start Date</th><th>End Date</th></tr>
+                    <?php echo admin::getPendingCustomers() ?>
+                </table>
+                <h4>Documents Pending Review:</h4>
+                <table>
+                    <tr><th>First Name</th><th>Last Name</th><th>ID Number</th><th>File Name</th><th>File Submit Date</th><th>Action</th></tr>
+                    <?php echo admin::getPendingDocuments() ?>
+                </table>
+                <h4>Customers with Expiring Documents</h4>
+                <table>
+                    <tr><th>First Name</th><th>Last Name</th><th>ID Number</th><th>Customer End Date</th><th>Document End Date</th><th>Status</th><th>Send Email</th></tr>
+                    <?php echo admin::getCustomersWithExpiringDocuments() ?>
+                </table>
                 <h3>Statistics:</h3>
                 <h4>Customers:</h4>
                 <label>Total Number of Riders:</label><?php echo admin::customerStats('total') ?><br />
