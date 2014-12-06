@@ -25,4 +25,8 @@ $sql = "UPDATE customers SET salutation = '$salutation', firstName = '$firstName
 if (!mysqli_query($con, $sql)) {
     die('Error: ' . mysqli_error($con));
 }
+$sql_addr = "UPDATE customers_addr SET street = '$streetAddr', apt = '$aptAddr', city='$cityAddr'";
+if (!mysqli_query($con, $sql_addr)) {
+    die('Error: ' . mysqli_error($con));
+}
 header("Location: ../viewCustomer/?cust_id=" . $cust_id);

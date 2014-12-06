@@ -36,7 +36,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo $DIR ?>/schedule/index.php">Schedule</a>
+                        <a href="<?php echo $DIR ?>/schedule/scheduleByCustomer/index.php"">Schedule</a>
                         <ul>
                             <li>
                                 <a href="<?php echo $DIR ?>/schedule/scheduleByCustomer/index.php">View Schedule</a>
@@ -112,6 +112,14 @@
                     </li>
                     <li>
                         <a href="<?php echo $DIR ?>/admin/index.php">Admin</a>
+                        <ul>
+                            <li>
+                                <a href="<?php echo $DIR ?>/admin/index.php">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $DIR ?>/admin/user.php">User Management</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="<?php echo $DIR ?>/login/logout.php">Log out</a>
@@ -129,11 +137,6 @@
                 </li>
                 <li>
                     <a href="<?php echo $DIR ?>/customer/newCustomer/index.php">Register</a>
-                    <ul>
-                        <li>
-                            <a href="<?php echo $DIR ?>/customer/newCustomer/index.php">New Customers</a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </div>

@@ -94,41 +94,48 @@ $doc_info = customer::getAlLDocuments($cust_id);
                     <h4>Customer Status:</h4>
                     <?php
                     $status = $array_info['isapproved'];
+                    if ($_SESSION['isAdmin']==true){
+                        $html = "<a href='".$DIR."/customer/approveCustomer/index.php?cust_id=".$cust_id."'>";
+                    }
+                    else {
+                        $html = "<a>";
+                    }
                     switch ($status){
                         case 0:
-                            echo "<a href='".$DIR."/customer/approveCustomer/index.php?cust_id=".$cust_id."'><span style='color:blue'>Requires Approval</span></a>";
+                            echo "$html<span style='color:blue'>Requires Approval</span></a>";
                             break;
                         case 1:
-                            echo "<a href='".$DIR."/customer/approveCustomer/index.php?cust_id=".$cust_id."'><span style='color:green'>Approved</span></a>";
+                            echo "$html<span style='color:green'>Approved</span></a>";
                             break;
                         case 2:
-                            echo "<a href='".$DIR."/customer/approveCustomer/index.php?cust_id=".$cust_id."'><span style='color:red'>Denied</span></a>";
+                            echo "$html<span style='color:red'>Denied</span></a>";
                             break;
                     }
                     ?>
                     <h4>Doctor's Notes on File</h4>
                     <?php
                     for ($i = 0; $i < sizeof($doc_info); $i++) {
-                        echo "<label>File Link: </label><a href='../../" . $doc_info[$i]['filename'] . "'>Document No. " . $doc_info[$i]['document_id'] . " submitted " . $doc_info[$i]['file_submit_date'] . "</a><br />";
-                        echo "<label>File Status: </label>";
-                        if ($_SESSION['isAdmin']== true){
-                            echo "<a href='$DIR/document/reviewDocument/index.php?doc_id=" . $doc_info[$i]['document_id'] . "'>";
+                        if ($doc_info[$i]['filename'] != "") {
+                            echo "<label>File Link: </label><a href='../../" . $doc_info[$i]['filename'] . "'>Document No. " . $doc_info[$i]['document_id'] . " submitted " . $doc_info[$i]['file_submit_date'] . "</a><br />";
+                            echo "<label>File Status: </label>";
+                            if ($_SESSION['isAdmin'] == true) {
+                                echo "<a href='$DIR/document/reviewDocument/index.php?doc_id=" . $doc_info[$i]['document_id'] . "'>";
+                            } else {
+                                echo "<a>";
+                            }
+                            switch ($doc_info[$i]['review_status']) {
+                                case 0:
+                                    echo "<span style='color: blue'>Pending Review</span></a>";
+                                    break;
+                                case 1:
+                                    echo "<span style='color: green'>Approved with expiration date of " . $doc_info[$i]['file_exp_date'] . "</span></a>";
+                                    break;
+                                case 2:
+                                    echo "<span style='color: red'>Denied</span></a>";
+                                    break;
+                            }
+                            echo "<br /><br />";
                         }
-                        else {
-                            echo "<a>";
-                        }
-                        switch ($doc_info[$i]['review_status']) {
-                            case 0:
-                                echo "<span style='color: blue'>Pending Review</span></a>";
-                                break;
-                            case 1:
-                                echo "<span style='color: green'>Approved with expiration date of " . $doc_info[$i]['file_exp_date'] . "</span></a>";
-                                break;
-                            case 2:
-                                echo "<span style='color: red'>Denied</span></a>";
-                                break;
-                        }
-                        echo "<br /><br />";
                     }
 
                     ?>

@@ -123,7 +123,7 @@ class schedule
     {
         global $con;
         $arrayInfo = [];
-        $sql = "SELECT event_id, schedule_event.timeblock_id, schedule_event.dayofweek_id, start_loc, end_loc, cart_id, start_date, end_date, day_description, TIME_FORMAT(start_time, '%H:%i') as start_time, TIME_FORMAT(end_time, '%H:%i') as end_time FROM schedule_event, schedule_timeblock, schedule_daysofweek WHERE schedule_daysofweek.dayofweek_id=schedule_event.dayofweek_id AND schedule_timeblock.timeblock_id = schedule_event.timeblock_id AND cust_id=$cust_id";
+        $sql = "SELECT event_id, schedule_event.timeblock_id, schedule_event.dayofweek_id, start_loc, end_loc, cart_id, start_date, end_date, day_description, TIME_FORMAT(start_time, '%H:%i') as start_time, TIME_FORMAT(end_time, '%H:%i') as end_time FROM schedule_event, schedule_timeblock, schedule_daysofweek WHERE schedule_daysofweek.dayofweek_id=schedule_event.dayofweek_id AND schedule_timeblock.timeblock_id = schedule_event.timeblock_id AND cust_id=$cust_id AND isActive = 1";
         $result = mysqli_query($con, $sql);
         if (!$result) {
             exit (mysqli_error($con));

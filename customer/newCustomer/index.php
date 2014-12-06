@@ -25,7 +25,23 @@ include_once $root_DIR . '/includes/customer_functions.php';
                 dateFormat: "yy-mm-dd",
                 beforeShowDay: $.datepicker.noWeekends
             });
-        })
+            $("#datepicker2").change(function(){
+                var startDate = new Date($("#datepicker1").val());
+                var endDate = new Date($(this).val());
+                if (startDate > endDate){
+                    alert("The end date cannot be before the start date");
+                    $(this).val("");
+                }
+            });
+            $("#datepicker1").change(function(){
+                var endDate = new Date($("#datepicker2").val());
+                var startDate = new Date($(this).val());
+                if (startDate > endDate){
+                    alert("The end date cannot be before the start date");
+                    $(this).val("");
+                }
+            });
+        });
 
 
     </script>
@@ -60,7 +76,7 @@ include('../../includes/header.php');
                     <label>NickName:</label>
                     <input type="text" name="nickName"><br/>
                     <label>USC ID Number:</label>
-                    <input type="text" maxlength="10" name="USCID" required/><br/>
+                    <input type="text" maxlength="10" name="USCID" pattern="[0-9]{10}" title = "Must be 10 characters long, numbers only" required/><br/>
                     <label>Password:</label>
                     <input type="password" name="password" required title="Must be at least 6 characters long"
                            pattern=".{6,}"/><br/>
@@ -84,12 +100,12 @@ include('../../includes/header.php');
                     echo customer::generateStateSelect("state", $con);
                     ?><br/>
                     <label>Zipcode:</label>
-                    <input type="text" name="zip" maxlength="5" required/><br/>
+                    <input type="text" name="zip" maxlength="5" pattern="\d{5}" title="Must be 5 digits, numbers only" required/><br/>
                     <label>Cell Number:</label>
-                    (<input type="text" name="cell1" maxlength="3" size="2" required/>)<input type="text" name="cell2"
-                                                                                              size="2" maxlength="3"
+                    (<input type="text" name="cell1" maxlength="3" pattern="\d{3}" size="2" required/>)<input type="text" name="cell2"
+                                                                                              size="2" maxlength="3" pattern="\d{3}"
                                                                                               required/>-<input
-                        type="text" name="cell3" size="3" maxlength="4" required/> <br/>
+                        type="text" name="cell3" size="3" maxlength="4" pattern="\d{4}" required/> <br/>
                     <label>Nature of Disability:</label>
                     <textarea row="4" col="100" maxlength="200" name="natureOfDisability" required/></textarea><br/>
                     <label>Special Needs or Requests:</label>

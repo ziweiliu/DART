@@ -170,8 +170,8 @@ class admin{
             array_push($array, $r);
         }
         for ($i = 0; $i < sizeof($array); $i++) {
-            if ($array[$i]['review_status'] == 0) {
-                $html .= "<tr><td>" . $array[$i]['firstName'] . "</td><td>" . $array[$i]['lastName'] . "</td><td>" . $array[$i]['uscID'] . "</td><td><a href='$DIR/" . $array[$i]['filename'] . "'>" . $array[$i]['filename'] . "</a></td><td>" . $array[$i]['file_submit_date'] . "</td><td><a href='$DIR/document/reviewDocument/index.php?doc_id=" . $array[$i]['document_id'] . "'>Click Here to Review </a></td></td></tr>";
+            if ($array[$i]['review_status'] == 0 && $array[$i]['filename']!="") {
+                $html .= "<tr><td>" . $array[$i]['firstName'] . "</td><td>" . $array[$i]['lastName'] . "</td><td><a href='$DIR/customer/viewCustomer/index.php?cust_id=".$array[$i]['cust_id']."'>".$array[$i]['uscID']."</a></td><td><a href='$DIR/" . $array[$i]['filename'] . "'>" . $array[$i]['filename'] . "</a></td><td>" . $array[$i]['file_submit_date'] . "</td><td><a href='$DIR/document/reviewDocument/index.php?doc_id=" . $array[$i]['document_id'] . "'>Click Here to Review </a></td></td></tr>";
             }
         }
         return $html;
@@ -190,11 +190,46 @@ class admin{
             array_push($array, $r);
         }
         for ($i = 0; $i < sizeof($array); $i++){
+            $status = "";
             $file_exp_date = date('Y-m-d', strtotime($array[$i]['file_exp_date']));
             $twoWeeks = date ('Y-m-d', strtotime("+2 weeks"));
             if ($file_exp_date < $twoWeeks){
-                $html .= "<tr><td>".$array[$i]['firstName']."</td><td>".$array[$i]['lastName']."</td><td>".$array[$i]['uscID']."</td><td>".$array[$i]['endDate']."</td><td>".$array[$i]['file_exp_date']."</td><td></td><td><a href='".$DIR."/admin/sendEmail/index.php?cust_id=".$array[$i]['cust_id']."&template_id=4'>Click to send</a></td></tr>";
+                $sql_email_log = "SELECT * FROM email_log WHERE cust_id = ".$array[$i]['cust_id']." AND template_id = 4";
+                $result_email = mysqli_query($con, $sql_email_log);
+                if (!$result_email){
+                    exit (mysqli_error($con));
+                }
+                while ($r = mysqli_fetch_array($result_email)){
+                    $date = $r['date_sent'];
+                    $status = "<span style='color:green'>Sent on $date</span>";
+                }
+                if ($status == ""){
+                    $status = "<span style='color:red'>Need Email </span>";
+                }
+                $html .= "<tr><td>".$array[$i]['firstName']."</td><td>".$array[$i]['lastName']."</td><td><a href='$DIR/customer/viewCustomer/index.php?cust_id=".$array[$i]['cust_id']."'>".$array[$i]['uscID']."</a></td><td>".$array[$i]['endDate']."</td><td>".$array[$i]['file_exp_date']."</td><td>$status</td><td><a href='".$DIR."/admin/sendEmail.php?cust_id=".$array[$i]['cust_id']."&template_id=4'>Click to send</a></td></tr>";
             }
+        }
+        return $html;
+    }
+    public static function getEmployees(){
+        global $con;
+        global $DIR;
+        $html = "";
+        $sql = "SELECT * FROM employees, user WHERE employees.uscID = user.uscID";
+        $result = mysqli_query($con, $sql);
+        while ($r = mysqli_fetch_array($result)){
+            $html .= "<tr><td>".$r['firstName']."</td><td>".$r['lastName']."</td><td>".$r['uscID']."</td><td><a href='$DIR/admin/reset.php?user_id=".$r['user_id']."'>Reset Password</a></td></tr>";
+        }
+        return $html;
+    }
+    public static function getCustomers(){
+        global $con;
+        global $DIR;
+        $html = "";
+        $sql = "SELECT * FROM customers, user WHERE customers.uscID = user.uscID";
+        $result = mysqli_query($con, $sql);
+        while ($r = mysqli_fetch_array($result)){
+            $html .= "<tr><td>".$r['firstName']."</td><td>".$r['lastName']."</td><td>".$r['uscID']."</td><td><a href='$DIR/admin/reset.php?user_id=".$r['user_id']."'>Reset Password</a></td></tr>";
         }
         return $html;
     }

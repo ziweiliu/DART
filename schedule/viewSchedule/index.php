@@ -2,6 +2,7 @@
 session_start();
 $root_DIR = "../../";
 include_once $root_DIR . 'includes/db_connect.php';
+include_once $root_DIR . 'includes/session_functions.php';
 if ($_SESSION['isAdmin'] == false) {
     header("location: " . $DIR . "/index.php?message=error");
 }
@@ -12,26 +13,36 @@ $day_id = test_input($_GET['day_id']);
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <script type="text/javascript" src="<?php echo $DIR; ?>/js/handlebars-v2.0.0.js"></script>
     <link href="<?php echo $DIR ?>/css/core.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo $DIR ?>/css/schedule.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo $DIR ?>/css/UI-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css"/>
     <script src="<?php echo $DIR ?>/js/jquery.js"></script>
+    <script src="<?php echo $DIR ?>/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="<?php echo $DIR ?>/js/main.js"></script>
-    <script src="<?php echo $DIR ?>/js/schedule.js"></script>
+
     <title>View Schedule</title>
 </head>
 <body>
+<div id="overlay" class="hidden">
+    <div id="overlay-close"></div>
+    <div id="overlay-display">
+        <?php include $root_DIR . 'includes/overlay-template.php'; ?>
+    </div>
+</div>
+<script src="<?php echo $DIR ?>/js/schedule.js"></script>
 <div id="wrapper">
     <div id="container">
         <?php
         include $root_DIR . 'includes/header.php';
+        schedule::time_to_JS(schedule::getTimes($day_id));
         schedule::to_JS(schedule::getSchedule($day_id));
+        schedule::location_to_JS(schedule::generateLocation());
 
         ?>
         <div id="content">
             <h2><?php echo schedule::getDayDesc($day_id)?></h2>
 
-            <div id="light"></div>
-            <div id="dark" onClick="finishEdit()"></div>
             <div id="scheduleWrapper">
 
                 <div class="time-wrapper">
@@ -79,6 +90,7 @@ $day_id = test_input($_GET['day_id']);
 </div>
 <script>
     populateSchedule(arraySchedule);
+    console.log(arraySchedule);
 </script>
 </body>
 </html>

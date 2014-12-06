@@ -20,7 +20,6 @@ function displayUnavailableSlots(schedule, id) {
 
 
     }
-    console.log(schedule);
 }
 
 var template = Handlebars.compile($('#overlay-template-others').html());
